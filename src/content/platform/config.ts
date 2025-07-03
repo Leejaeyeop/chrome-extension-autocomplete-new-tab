@@ -11,8 +11,6 @@ export const config: Record<Platform, SearchConfig> = {
     selector: ".ytSuggestionComponentSuggestion:not([data-new-tab-processed])",
     containerSelector: [".ytSuggestionComponentRightContainer"],
     urlTemplate: (query: string) =>
-      `https://www.youtube.com/results?search_query=${encodeURIComponent(
-        query
-      )}`,
+      `https://www.youtube.com/results?search_query=${encodeURIComponent(query)}`,
   },
 };

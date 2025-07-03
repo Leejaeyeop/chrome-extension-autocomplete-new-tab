@@ -1,18 +1,32 @@
 {
   "name": "chrome-extension-autocomplete-new-tab",
   "version": "1.0.0",
-  "description": "",
+  "description": "Chrome extension to open Google and Youtube autocomplete suggestions in a new tab, with user-configurable settings.",
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc && vite build"
+    "build": "tsc && vite build",
+    "lint": "eslint . --ext ts --fix"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "keywords": [
+    "chrome-extension",
+    "google",
+    "youtube",
+    "search",
+    "new-tab",
+    "autocomplete"
+  ],
+  "author": "Lee Jaeyep <dlwoduq1011@gmail.com>",
+  "license": "MIT",
   "devDependencies": {
     "@crxjs/vite-plugin": "^2.0.2",
     "@types/chrome": "^0.0.329",
+    "@typescript-eslint/eslint-plugin": "^8.35.1",
+    "@typescript-eslint/parser": "^8.35.1",
+    "eslint": "^8.57.1",
+    "eslint-config-prettier": "^10.1.5",
+    "eslint-plugin-prettier": "^5.5.1",
+    "prettier": "^3.6.2",
     "typescript": "^5.8.3",
     "vite": "^7.0.0"
   }
