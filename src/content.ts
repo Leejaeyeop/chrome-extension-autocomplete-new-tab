@@ -97,6 +97,7 @@ class SearchSuggestionNewTab {
       this.processYoutubeSuggestions();
     }
   }
+
   private processGoogleSuggestions(): void {
     const suggestions = document.querySelectorAll(
       this.config.google.selector
@@ -139,26 +140,6 @@ class SearchSuggestionNewTab {
   }
 
   private extractAriaLabel(element: SuggestionElement): string | null {
-    // YouTube의 경우 더 구체적으로 찾기
-    if (window.location.hostname.includes("youtube.com")) {
-      // YouTube 구조에서 aria-label 찾기
-      const ariaLabelElement = element.querySelector(
-        '[role="option"][aria-label]'
-      ) as HTMLElement;
-      if (ariaLabelElement) {
-        return ariaLabelElement.getAttribute("aria-label");
-      }
-
-      // 대안: 텍스트 내용으로부터 추출
-      const textContainer = element.querySelector(
-        ".ytSuggestionComponentLeftContainer"
-      );
-      if (textContainer) {
-        return textContainer.textContent?.trim() || null;
-      }
-    }
-
-    // Google의 경우 기존 방식
     return (
       element.getAttribute("aria-label") ||
       element.querySelector("[aria-label]")?.getAttribute("aria-label") ||
@@ -222,21 +203,6 @@ class SearchSuggestionNewTab {
       if (container) {
         return container;
       }
-    }
-
-    // YouTube의 경우 특별 처리
-    if (platform === "youtube") {
-      // .ytSuggestionComponentRightContainer가 없으면 직접 추가
-      const rightContainer = suggestionElement.querySelector(
-        ".ytSuggestionComponentRightContainer"
-      ) as HTMLElement;
-      if (!rightContainer) {
-        const newRightContainer = document.createElement("div");
-        newRightContainer.className = "ytSuggestionComponentRightContainer";
-        suggestionElement.appendChild(newRightContainer);
-        return newRightContainer;
-      }
-      return rightContainer;
     }
 
     return suggestionElement as HTMLElement;
