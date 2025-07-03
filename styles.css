@@ -1,0 +1,87 @@
+/* YouTube 전용 버튼 스타일 */
+.ytSuggestionComponentSuggestion .search-new-tab-btn {
+  position: static;
+  transform: none;
+  width: 28px;
+  height: 28px;
+  margin: 0 8px;
+  background: rgba(0, 0, 0, 0.05);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+} /* 새 탭 버튼 스타일 */
+.search-new-tab-btn {
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 24px;
+  height: 24px;
+  background: rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 12px;
+  opacity: 0;
+  transition: all 0.2s ease;
+  z-index: 9999;
+  user-select: none;
+  pointer-events: auto;
+  isolation: isolate;
+}
+
+.search-new-tab-btn:hover {
+  background: rgba(0, 0, 0, 0.2);
+}
+
+/* 자동완성 항목에 마우스 호버 시 버튼 표시 */
+/* .sbct:hover .search-new-tab-btn,
+.ytSuggestionComponentSuggestion:hover .search-new-tab-btn, */
+.sbhl .search-new-tab-btn,
+.ytSuggestionComponentHighlighted .search-new-tab-btn {
+  opacity: 1;
+}
+
+/* Google 자동완성 항목 스타일 조정 */
+.sbct {
+  position: relative;
+}
+
+.sbct .eIPGRd {
+  padding-right: 40px;
+}
+
+/* YouTube 자동완성 항목 스타일 조정 */
+.ytSuggestionComponentSuggestion {
+  position: relative;
+}
+
+.ytSuggestionComponentRightContainer {
+  position: relative;
+  min-width: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* 다크 모드 지원 */
+@media (prefers-color-scheme: dark) {
+  .search-new-tab-btn {
+    background: rgba(255, 255, 255, 0.1);
+    color: #fff;
+  }
+
+  .search-new-tab-btn:hover {
+    background: rgba(255, 255, 255, 0.2);
+  }
+}
+
+/* 모바일 반응형 */
+@media (max-width: 768px) {
+  .search-new-tab-btn {
+    width: 28px;
+    height: 28px;
+    font-size: 14px;
+    right: 6px;
+  }
+}
