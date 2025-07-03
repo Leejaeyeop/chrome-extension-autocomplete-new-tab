@@ -11,5 +11,5 @@
     "forceConsistentCasingInFileNames": true // 파일 이름 대소문자 일관성 강제
   },
   "include": ["src/**/*.ts"], // 컴파일할 TypeScript 파일 지정
-  "exclude": ["node_modules", "dist", "src/types.ts"] // 컴파일에서 제외할 폴더 지정
+  "exclude": ["node_modules", "dist", "src/content/types.ts"] // 컴파일에서 제외할 폴더 지정
 }

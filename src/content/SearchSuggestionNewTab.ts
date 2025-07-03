@@ -1,41 +1,10 @@
-// Types 정의
-interface SuggestionElement extends HTMLElement {
-  getAttribute(name: string): string | null;
-  querySelector(selector: string): Element | null;
-  classList: DOMTokenList;
-  setAttribute(name: string, value: string): void;
-}
-
-type Platform = "google" | "youtube";
-
-interface SearchConfig {
-  selector: string;
-  containerSelector: string[];
-  urlTemplate: (query: string) => string;
-}
+import { config } from "./platform/config";
+import { Platform, SuggestionElement } from "./types";
 
 // 자동완성 항목에 새 탭 버튼 추가
-class SearchSuggestionNewTab {
+export default class SearchSuggestionNewTab {
   private observer: MutationObserver | null = null;
   private processedElements: WeakSet<Element> = new WeakSet();
-
-  private readonly config: Record<Platform, SearchConfig> = {
-    google: {
-      selector: ".sbct:not([data-new-tab-processed])",
-      containerSelector: [".eIPGRd", ".pcTkSc"],
-      urlTemplate: (query: string) =>
-        `https://www.google.com/search?q=${encodeURIComponent(query)}`,
-    },
-    youtube: {
-      selector:
-        ".ytSuggestionComponentSuggestion:not([data-new-tab-processed])",
-      containerSelector: [".ytSuggestionComponentRightContainer"],
-      urlTemplate: (query: string) =>
-        `https://www.youtube.com/results?search_query=${encodeURIComponent(
-          query
-        )}`,
-    },
-  };
 
   constructor() {
     this.init();
@@ -100,7 +69,7 @@ class SearchSuggestionNewTab {
 
   private processGoogleSuggestions(): void {
     const suggestions = document.querySelectorAll(
-      this.config.google.selector
+      config.google.selector
     ) as NodeListOf<SuggestionElement>;
 
     suggestions.forEach((item) => {
@@ -111,7 +80,7 @@ class SearchSuggestionNewTab {
 
   private processYoutubeSuggestions(): void {
     const suggestions = document.querySelectorAll(
-      this.config.youtube.selector
+      config.youtube.selector
     ) as NodeListOf<SuggestionElement>;
 
     suggestions.forEach((item) => this.addNewTabButton(item, "youtube"));
@@ -165,7 +134,7 @@ class SearchSuggestionNewTab {
       const ariaLabel = this.extractAriaLabel(suggestionElement);
       if (!ariaLabel) return;
 
-      const searchUrl = this.config[platform].urlTemplate(ariaLabel);
+      const searchUrl = config[platform].urlTemplate(ariaLabel);
       // ✅ 크롬 확장 전용 API로 새 탭을 백그라운드로 열기
       // 백그라운드 스크립트로 새 탭 열기 요청 메시지를 보냅니다.
       chrome.runtime.sendMessage({
@@ -194,7 +163,7 @@ class SearchSuggestionNewTab {
     suggestionElement: SuggestionElement,
     platform: Platform
   ): HTMLElement | null {
-    const containerSelectors = this.config[platform].containerSelector;
+    const containerSelectors = config[platform].containerSelector;
 
     for (const selector of containerSelectors) {
       const container = suggestionElement.querySelector(
@@ -237,25 +206,3 @@ class SearchSuggestionNewTab {
     }
   }
 }
-
-// 익스텐션 시작
-let searchNewTab: SearchSuggestionNewTab | null = null;
-
-// 페이지가 완전히 로드된 후 시작
-const initializeExtension = (): void => {
-  searchNewTab = new SearchSuggestionNewTab();
-};
-
-if (document.readyState === "loading") {
-  document.addEventListener("DOMContentLoaded", initializeExtension);
-} else {
-  initializeExtension();
-}
-
-// 페이지 언로드 시 정리
-window.addEventListener("beforeunload", () => {
-  if (searchNewTab) {
-    searchNewTab.destroy();
-    searchNewTab = null;
-  }
-});
