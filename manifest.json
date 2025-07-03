@@ -1,0 +1,20 @@
+{
+  "manifest_version": 3,
+  "name": "Search Suggestions New Tab",
+  "version": "1.0",
+  "description": "Open Google/YouTube search autocomplete in a new tab",
+
+  "permissions": ["activeTab", "tabs"],
+
+  "content_scripts": [
+    {
+      "matches": ["*://*.google.com/*", "*://*.youtube.com/*"],
+      "js": ["dist/content.js"],
+      "css": ["styles.css"],
+      "run_at": "document_end"
+    }
+  ],
+  "background": {
+    "service_worker": "dist/background.js"
+  }
+}
