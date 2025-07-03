@@ -22,7 +22,6 @@
   justify-content: center;
   cursor: pointer;
   font-size: 12px;
-  opacity: 0;
   transition: all 0.2s ease;
   z-index: 9999;
   user-select: none;
@@ -32,14 +31,6 @@
 
 .search-new-tab-btn:hover {
   background: rgba(0, 0, 0, 0.2);
-}
-
-/* 자동완성 항목에 마우스 호버 시 버튼 표시 */
-/* .sbct:hover .search-new-tab-btn,
-.ytSuggestionComponentSuggestion:hover .search-new-tab-btn, */
-.sbhl .search-new-tab-btn,
-.ytSuggestionComponentHighlighted .search-new-tab-btn {
-  opacity: 1;
 }
 
 /* Google 자동완성 항목 스타일 조정 */
