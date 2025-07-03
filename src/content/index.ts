@@ -1,5 +1,5 @@
+import "./styles.css";
 import SearchSuggestionNewTab from "./SearchSuggestionNewTab";
-
 // 익스텐션 시작
 let searchNewTab: SearchSuggestionNewTab | null = null;
 
