@@ -3,9 +3,6 @@
   "name": "Google/YouTube autocomplete New Tab Search",
   "version": "1.0",
   "description": "Open Google/YouTube search autocomplete in a new tab",
-
-  "permissions": ["tabs"],
-
   "content_scripts": [
     {
       "matches": ["*://*.google.com/*", "*://*.youtube.com/*"],
