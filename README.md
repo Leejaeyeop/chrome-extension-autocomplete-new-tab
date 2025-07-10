@@ -1,5 +1,7 @@
 # Google & YouTube New Tab Search 🚀
 
+https://chromewebstore.google.com/detail/googleyoutube-autocomplet/pmabbdlbkndeemogalkifoehafgckaag?authuser=0&hl=ko
+
 Open the Google and YouTube search autocomplete proposal on a new tab with Chrome extensions.
 
 ![screenshot](./assets/screenshot2.png)
